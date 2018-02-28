@@ -1,8 +1,18 @@
- # Pokemon Battle Game
+## Pokemon Battle Game
 
-Using the Object Oriented Programming skills you've learned this week, we want you to implement a Pokemon battle game, and all the classes necessary to build it. 
 
-## Pokemon Class 
+Using the Object Oriented Programming skills you've learned this week, we want you to implement a Pokemon battle game!
+
+## Day 1
+
+In day 1 of this sprint you are expected to use the pseudo-classical pattern of object creation in order to create your pokemon, trainer and battle objects.  Remember to think about which properties and methods should belong to each of these different objects.
+
+## Day 2
+
+In day 2 of this sprint you should re-factor your code to make use of ES6 classes.  Any code that uses the pseudo-classical pattern of object creation should be re-factored into classes.
+
+
+## Pokemon
 
 - Each pokemon should have a name, hit points (health), attack damage, the sound that it makes, and one move. (e.g. 'bite')  
 - The default 'type' for each Pokemon will have no strengths or weaknesses. 
@@ -11,11 +21,11 @@ Using the Object Oriented Programming skills you've learned this week, we want y
 - Every pokemon should have a talk method available, which returns its sound.
 - Every pokemon should have a useYourMoves method available, which returns its favourite move.
 
-## Trainer Class 
-- You, as a pokemon trainer, should also have a class. Pokemon trainers will have a name, and a way of storing pokemon. 
+## Trainer
+- Pokemon trainers will have a name, and a way of storing pokemon. 
 - Each pokemon trainer will also have a catch method available, so they can store more pokemon. 
 
-## Battle Class
+## Battle
 - Finally, you will need a way to battle the pokemon. 
 - The battle should take two trainers and the names of the pokemon they wish to battle. 
 - The battle should have a fight method available. This should take the pokemon whose turn it is, attack the defending pokemon (deducting attacker's attack damage from the defender's hit points), and end their turn. 
