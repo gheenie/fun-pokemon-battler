@@ -15,7 +15,7 @@ In day 2 of this sprint you should re-factor your code to make use of ES6 classe
 ## Pokemon
 
 - Each pokemon should have a name, hit points (health), attack damage, the sound that it makes, and one move. (e.g. 'bite')  
-- The default 'type' for each Pokemon will have no strengths or weaknesses. 
+- Each pokemon should have a type property which deafults to normal. Normal pokemon have no strengths or weaknesses.
 - You should be able to create grass pokemon, water pokemon and fire pokemon. 
 - Fire pokemon are strong against grass, and weak against water. Grass pokemon are strong against water, and weak against fire. Water pokemon are strong against fire and weak against grass. 
 - Every pokemon should have a talk method available, which returns its sound.
