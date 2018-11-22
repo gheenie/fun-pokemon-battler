@@ -36,7 +36,7 @@ In day 2 of this sprint you should re-factor your code to make use of ES6 classe
 ## Making the game
 Once you have all the necessary parts fully tested, make the game! 
 
-Using the [inquirer library](https://www.npmjs.com/package/inquirer), build a command line application to play your pokemon battle game. The game should be played using inputs and selections. 
+Using the [inquirer library](https://github.com/SBoudrias/Inquirer.js), build a command line application to play your pokemon battle game. The game should be played using inputs and selections. 
 
 ### Extra Requirements
 - Implement a critical hit, that randomly awards pokemon triple damage.
