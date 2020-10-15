@@ -24,10 +24,10 @@ function createStack() {
 }
 
 const testStack = createStack();
-testStack.push('piano');
+testStack.addToStorage('piano');
 ```
 
-a) Work out what happens when `testStack.push` is invoked in order to add the "piano" to storage
+a) Work out what happens when `testStack.addToStorage` is invoked in order to add the "piano" to storage
 
 ---
 
