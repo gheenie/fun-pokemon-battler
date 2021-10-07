@@ -3,7 +3,7 @@
 
 Using the Object Oriented Programming skills you've learned this week, we want you to implement a Pokemon battle game!
 
-For those of you undamiliar with Pokemon, you could try to think about it as people (trainers) who have pets (Pokemon), but only have room for 6 pets at a time. 
+For those of you unfamiliar with Pokemon, you could try to think about it as people (trainers) who have pets (Pokemon), but only have room for 6 pets at a time. 
 
 These people are also a bit strange, and they get their pets into fights with other people's pets in the park for no reason at all...
 
