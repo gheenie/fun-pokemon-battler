@@ -63,7 +63,7 @@ Below you will find a plan of what structures we think will be useful for the ga
 
 - `Charmander` should be a `FirePokemon` and have its move be `"ember"`
 - `Squirtle` should be a `WaterPokemon` and have its move be `"water gun"`
-- `Bulbasuar` should be a `GrassPokemon` and have its move be `"vine whip"`
+- `Bulbasaur` should be a `GrassPokemon` and have its move be `"vine whip"`
 - `Rattata` should be a `Pokemon`
 
 ## Pokeball
@@ -114,13 +114,12 @@ Pokeball behaviours include:
 ## Battle
 
 
-
 - Finally, you will need a way to battle the Pokemon.
 - The battle should take two trainers and the names of the Pokemon they wish to battle.
 
-`Methods`
+### Methods
 
-- `fight` method
+- `fight`
   - this should take the Pokemon whose turn it is,
   - attack the defending Pokemon (deducting attacker's attack damage from the defender's hit points)
   - end their turn
