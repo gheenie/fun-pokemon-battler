@@ -3,7 +3,7 @@
 ​
 You will be implementing a Pokemon battle game using the Object Oriented Programming skills you've learned this week!
 ​
-For those of you unfamiliar with Pokemon, you could try to think about it as people (trainers) who have pets (Pokemon), that live inside tiny houses(Pokeballs) but can only carry 6 tiny houses at a time
+For those of you unfamiliar with Pokemon, you can think about it as people (trainers) who have pets (pokemon), that live inside tiny houses (pokeballs). Trainers can only hold a maximum 6 pokeballs.
 ​
 These people are also a bit strange, and they get their pets into fights with other people's pets in the park for no reason at all...
 ​
@@ -11,14 +11,12 @@ These people are also a bit strange, and they get their pets into fights with ot
 ### Data Structures
 
 ​
-We have already had a plan of what structures we wanted to use to make this game, you will find that to begin with they are very clear as to what we want you to do, but as you progress they are more open to how you want to implement them.
+Below you will find a plan of what structures we think will be useful for the game. You will find that to begin with they are very clear as to what we want you to do, but as you progress they are more open to how you want to implement them.
 ​
 
 ## Pokemon (one class)
 
----
-
-`Properties`
+### Properties
 
 - A Pokemon will need to have the following properties:
   ​
@@ -28,32 +26,32 @@ We have already had a plan of what structures we wanted to use to make this game
   - `hitPoints`: the amount of health the Pokemon has, represented as a number
   - `attackDamage`: the amount of damage a Pokemon can inflict (should be a number)
   - `move`: This is the move the Pokemon does when battling, this should default to "tackle"
-    ​
-    `Methods`
+    
+ 
+ ### Methods
 
-- `isEffectiveAgainst` method
+- `isEffectiveAgainst`
   - this will take a string of a Pokemon type e.g "Fire", "Grass", "Normal" etc and return a Boolean if this Pokemon is effective against it, "normal" Pokemon are not effective against anything
-- `isWeakTo ` method
+- `isWeakTo`
   - this will take a string of a Pokemon type e.g "Fire", "Grass", "Normal" etc and return a Boolean if this pokemon is weak to it
   - "normal" Pokemon are not weak to anything
-- `takeDamage` method
-  - will take a number and reduce its health by the number given ​
-- `useMove` method
+- `takeDamage`
+  - will take a number and reduce its health by the number given 
+- `useMove`
   - will return the Pokemon's attackDamage
   - should also console log something like "PokemonX used PokemonX's move"
-    - don't worry about testing the console logs, but maybe have a think about how you might have done it (n.b its an extension task :) ) ​
-- `hasFainted` method
+  - _don't worry about testing the console logs, but maybe have a think about how you may go about it_
+- `hasFainted`
   - When a Pokemon's health is reduced to 0 they faint
   - hasFainted will return a Boolean based on whether the Pokemon has fainted
-    ​
+    
 
 ## Pokemon Types (3 classes that should extend Pokemon) -> Fire, Water, Grass
 
----
 
-- `Fire` pokemon are strong against grass, and weak against water.
-- `Grass` pokemon are strong against water, and weak against fire.
-- `Water` pokemon are strong against fire and weak against grass.
+- `fire` pokemon are strong against grass, and weak against water.
+- `grass` pokemon are strong against water, and weak against fire.
+- `water` pokemon are strong against fire and weak against grass.
 - The only difference should be that each Pokemon type will have different isEffectiveAgainst and isWeakTo
   ​
 
@@ -67,16 +65,14 @@ We have already had a plan of what structures we wanted to use to make this game
 - `Squirtle` should be a `WaterPokemon` and have its move be `"water gun"`
 - `Bulbasuar` should be a `GrassPokemon` and have its move be `"vine whip"`
 - `Rattata` should be a `Pokemon`
-  ​
 
 ## Pokeball
 
----
 
 ​
 `Pokeballs` are the containers for Pokemon. They are used in the game to catch pokemon and to release the Pokemon for battle.
 
-Pokeball behaviours include: -
+Pokeball behaviours include:
 
 - being able to store a Pokemon
 - throw it to catch a Pokemon
@@ -84,35 +80,32 @@ Pokeball behaviours include: -
 - check which Pokemon is in the Pokeball
   ​
 
-`Methods`
+### Methods
 
-- `throw` method
-  - takes a Pokemon and if the Pokeball doesn't have a Pokemon in it will store it,the - throw method should also console log something like ("you caught pokemonX's name")
-  - if it does have a pokemon stored inside it, it should return that Pokemon
+- `throw`
+  -  can take a `Pokemon` as an argument. If the pokeball is empty it will capture the passed pokemon. If it isn't empty the user should not be allowed to capture a pokemon with it! The `throw` method should also console log something like ("you caught pokemonX's name")
+  -  Additionally the method can be invoked with no argument. In this case the method should return the stored Pokemon (ready for battle). The `throw` method should  console log something like ("GO pokemonX's name!!") in this scenario. If the ball is empty then the user should be informed.
     ​
-- `isEmpty` method
+- `isEmpty`
   - should return a Boolean representing whether or not a Pokemon is stored inside it
     ​
-- `contains` method
+- `contains`
   - should return the name of the Pokemon that is stored,
-  - if the Pokeball is empty is should return "Empty ..."
+  - if the Pokeball is empty is should return "empty ..."
     ​
 
 ## Trainer
 
----
-
-​
 
 - A Trainer should have a belt property (you decide an appropriate data type) that should have 6 Pokeballs
 
-`Methods`
+### Methods
 
-- `catch` method
+- `catch`
   - takes a Pokemon as an argument
   - it should use one of its empty Pokeball's `throw` method to catch the Pokemon
   - should do something if you don't have any empty Pokeballs, what and how is up to you
-- `getPokemon` method that
+- `getPokemon`
   - takes the name of a Pokemon
   - will search for the the Pokemon with that name in the belt
   - use the Pokeball's throw to return that specific Pokemon
@@ -120,9 +113,7 @@ Pokeball behaviours include: -
 
 ## Battle
 
----
 
-​
 
 - Finally, you will need a way to battle the Pokemon.
 - The battle should take two trainers and the names of the Pokemon they wish to battle.
