@@ -31,9 +31,9 @@ Below you will find a plan of what structures we think will be useful for the ga
  ### Methods
 
 - `isEffectiveAgainst`
-  - this will take a string of a Pokemon type e.g "Fire", "Grass", "Normal" etc and return a Boolean if this Pokemon is effective against it, "normal" Pokemon are not effective against anything
+  - this will take as an argument a Pokemon and return a Boolean if the Pokemon is effective against the given Pokemon, "normal" Pokemon are not effective against anything
 - `isWeakTo`
-  - this will take a string of a Pokemon type e.g "Fire", "Grass", "Normal" etc and return a Boolean if this pokemon is weak to it
+  - this will take as an argument a Pokemon and return a Boolean if this pokemon is weak to the given Pokemon
   - "normal" Pokemon are not weak to anything
 - `takeDamage`
   - will take a number and reduce its health by the number given 
