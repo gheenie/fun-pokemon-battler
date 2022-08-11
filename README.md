@@ -6,6 +6,8 @@ For those of you unfamiliar with Pokemon, you can think about it as people (trai
 
 These people are also a bit strange, and they get their pets into fights with other people's pets in the park for no reason at all...
 
+> You can find some example data to use in [pokemon-data.md](pokemon-data.md)
+
 
 ### Data Structures
 
