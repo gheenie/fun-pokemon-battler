@@ -7,6 +7,7 @@ const [
   Squirtle,
   Bulbasaur,
   Rattata,
+  Pokeball
 ] = require("./index");
 
 describe("instantiating Pokemon", () => {
@@ -206,4 +207,60 @@ describe("extending classes from sub classes", () => {
     expect(rattata.hasOwnProperty("move")).toBe(true);
     expect(rattata.move).toBe("tackle");
   });
+});
+
+describe("Pokeball instantiation and methods", () => {
+    test("isEmpty()", () => {
+        const ball1 = new Pokeball();
+
+        expect( ball1.isEmpty() ).toBe(true);
+
+        ball1.storage = new Charmander("charchar", 1, 2);
+
+        expect( ball1.isEmpty() ).toBe(false);
+    });
+
+    test("contains()", () => {
+        const ball1 = new Pokeball();
+
+        expect( ball1.contains() ).toBe('empty ...');
+
+        ball1.storage = new Charmander("charchar", 1, 2);
+
+        expect( ball1.contains() ).toBe('charchar');
+    });
+
+    test("throw()", () => {
+        const logSpy = jest.spyOn(global.console, "log");
+        const ball1 = new Pokeball();
+        const charchar = new Charmander("charchar", 1, 2);
+        ball1.throw(charchar);
+    
+        // Throw called with an argument, ball currently empty.
+        expect( ball1.contains() ).toBe('charchar');
+        expect(logSpy).toHaveBeenCalledWith(
+            "you caught charchar"
+        );
+        
+        const turtle = new Squirtle('turtle', 1, 2);
+        ball1.throw(turtle);
+
+        // Throw called with an argument, ball currently occupied.
+        expect( ball1.contains() ).toBe('charchar');
+        expect(logSpy).toHaveBeenCalledWith(
+            "there is a pokemon in this ball"
+        );
+
+        const releasedPokemon = ball1.throw();
+        
+        // Throw called without argument, ball currently occupied.
+        expect(releasedPokemon.name).toBe('charchar');
+        expect(logSpy).toHaveBeenCalledWith('GO charchar !!!');
+
+        ball1.storage = '';
+        const noPokemon = ball1.throw();
+
+        // Throw called without argument, ball currently empty.
+        expect(logSpy).toHaveBeenCalledWith('there is no pokemon to release');
+    });
 });

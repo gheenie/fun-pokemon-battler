@@ -117,6 +117,42 @@ class Bulbasaur extends GrassPokemon {
 
 class Rattata extends Pokemon {}
 
+class Pokeball {
+    constructor() {
+        this.storage = '';
+    }
+
+    isEmpty() {
+        return this.storage === '';
+    }
+
+    contains() {
+        if ( this.isEmpty() ) return 'empty ...';
+
+        return this.storage.name;
+    }
+
+    throw(pokemon) {
+        if (pokemon === undefined) {
+            if ( !this.isEmpty() ) {
+                console.log(`GO ${this.storage.name} !!!`);
+
+                return this.storage;
+            }
+
+            console.log('there is no pokemon to release');
+        } else {
+            if ( this.isEmpty() ) {
+                this.storage = pokemon;
+
+                console.log(`you caught ${this.storage.name}`);
+            } else {
+                console.log('there is a pokemon in this ball');
+            }
+        }
+    }
+}
+
 module.exports = [
   Pokemon,
   FirePokemon,
@@ -126,4 +162,5 @@ module.exports = [
   Squirtle,
   Bulbasaur,
   Rattata,
+  Pokeball
 ];
