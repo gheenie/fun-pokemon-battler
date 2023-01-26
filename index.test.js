@@ -1,8 +1,13 @@
-const Pokemon = require("./index");
+const [
+    Pokemon, 
+    FirePokemon, 
+    WaterPokemon, 
+    GrassPokemon
+] = require("./index");
 
 describe("instantiating Pokemon", () => {
   test("all properties are specified", () => {
-    const testPokemon = new Pokemon("bob", 50, 33, "fire", "Headbutt");
+    const testPokemon = new Pokemon("bob", 50, 33, "fire", "headbutt");
 
     expect(testPokemon.hasOwnProperty("name")).toBe(true);
     expect(testPokemon.name).toBe("bob");
@@ -13,7 +18,7 @@ describe("instantiating Pokemon", () => {
     expect(testPokemon.hasOwnProperty("attackDamage")).toBe(true);
     expect(testPokemon.attackDamage).toBe(33);
     expect(testPokemon.hasOwnProperty("move")).toBe(true);
-    expect(testPokemon.move).toBe("Headbutt");
+    expect(testPokemon.move).toBe("headbutt");
   });
 
   test("both type and move uses default values", () => {
@@ -49,6 +54,7 @@ describe("testing Pokemon methods", () => {
     new1.takeDamage(10);
     expect(new1.hitPoints).toBe(90);
   });
+
   test("useMove method works", () => {
     const logSpy = jest.spyOn(global.console, "log");
     expect(new1.useMove()).toBe(10);
@@ -56,12 +62,84 @@ describe("testing Pokemon methods", () => {
       "Pokemontest used 10 Pokemontest's moves"
     );
   });
+
   test("hasFainted method works", () => {
     new1.takeDamage(89);
     expect(new1.hasFainted()).toBe(false);
     new1.takeDamage(1);
     expect(new1.hasFainted()).toBe(true);
   });
+});
+
+describe("instantiating Pokemon subclasses", () => {
+    test("all properties are specified", () => {
+        const firePokemon = new FirePokemon("fifire", 50, 33, "fire", "headbutt");
+        const waterPokemon = new WaterPokemon("wawater", 50, 33, "water", "headbutt");
+        const grassPokemon = new GrassPokemon("grgrass", 50, 33, "grass", "headbutt");
+        
+        expect(firePokemon.name).toBe("fifire");
+        expect(firePokemon.type).toBe("fire");
+        expect(firePokemon.hitPoints).toBe(50);
+        expect(firePokemon.attackDamage).toBe(33);
+        expect(firePokemon.move).toBe("headbutt");
+
+        expect(waterPokemon.name).toBe('wawater');
+        expect(grassPokemon.name).toBe('grgrass');
+    });
+});
+
+describe.only("testing overriding methods of Pokemon subclasses", () => {
+    const firePokemon = new FirePokemon("fifire", 50, 33, "fire", "headbutt");
+    const waterPokemon = new WaterPokemon("wawater", 50, 33, "water", "headbutt");
+    const grassPokemon = new GrassPokemon("grgrass", 50, 33, "grass", "headbutt");
+    
+    test("fire pokemon effective against grass", () => {
+        expect( firePokemon.isEffectiveAgainst(grassPokemon) ).toBe(true);
+    });
+
+    test("fire pokemon effective against others", () => {
+        expect( firePokemon.isEffectiveAgainst(waterPokemon) ).toBe(false);
+    });
+    
+    test("water pokemon effective against fire", () => {
+        expect( waterPokemon.isEffectiveAgainst(firePokemon) ).toBe(true);
+    });
+
+    test("water pokemon effective against others", () => {
+        expect( waterPokemon.isEffectiveAgainst(grassPokemon) ).toBe(false);
+    });
+
+    test("grass pokemon effective against water", () => {
+        expect( grassPokemon.isEffectiveAgainst(waterPokemon) ).toBe(true);
+    });
+
+    test("grass pokemon effective against others", () => {
+        expect( grassPokemon.isEffectiveAgainst(firePokemon) ).toBe(false);
+    });
+    
+    test("fire pokemon weak against grass", () => {
+        expect( firePokemon.isWeakto(waterPokemon) ).toBe(true);
+    });
+
+    test("fire pokemon weak against others", () => {
+        expect( firePokemon.isWeakto(grassPokemon) ).toBe(false);
+    });
+    
+    test("water pokemon weak against fire", () => {
+        expect( waterPokemon.isWeakto(grassPokemon) ).toBe(true);
+    });
+
+    test("water pokemon weak against others", () => {
+        expect( waterPokemon.isWeakto(firePokemon) ).toBe(false);
+    });
+
+    test("grass pokemon weak against water", () => {
+        expect( grassPokemon.isWeakto(firePokemon) ).toBe(true);
+    });
+
+    test("grass pokemon weak against others", () => {
+        expect( grassPokemon.isWeakto(waterPokemon) ).toBe(false);
+    });
 });
 
 //fire>grass
