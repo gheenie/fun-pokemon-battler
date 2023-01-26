@@ -177,11 +177,14 @@ class Trainer {
     }
 
     getPokemon(name) {
-        this.belt.forEach((ball) => {
-            if (ball.contains() === "name") {
+        for (let i = 0; i < this.belt.length; i++) {
+            const ball = this.belt[i];
+
+            if ( ball.contains() === "name" ) {
                 ball.throw();
+                break;
             }
-        });
+        }
     }
 }
 
