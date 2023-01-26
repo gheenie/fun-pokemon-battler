@@ -7,7 +7,8 @@ const [
   Squirtle,
   Bulbasaur,
   Rattata,
-  Pokeball
+  Pokeball,
+  Trainer,
 ] = require("./index");
 
 describe("instantiating Pokemon", () => {
@@ -210,57 +211,83 @@ describe("extending classes from sub classes", () => {
 });
 
 describe("Pokeball instantiation and methods", () => {
-    test("isEmpty()", () => {
-        const ball1 = new Pokeball();
+  test("isEmpty()", () => {
+    const ball1 = new Pokeball();
 
-        expect( ball1.isEmpty() ).toBe(true);
+    expect(ball1.isEmpty()).toBe(true);
 
-        ball1.storage = new Charmander("charchar", 1, 2);
+    ball1.storage = new Charmander("charchar", 1, 2);
 
-        expect( ball1.isEmpty() ).toBe(false);
-    });
+    expect(ball1.isEmpty()).toBe(false);
+  });
 
-    test("contains()", () => {
-        const ball1 = new Pokeball();
+  test("contains()", () => {
+    const ball1 = new Pokeball();
 
-        expect( ball1.contains() ).toBe('empty ...');
+    expect(ball1.contains()).toBe("empty ...");
 
-        ball1.storage = new Charmander("charchar", 1, 2);
+    ball1.storage = new Charmander("charchar", 1, 2);
 
-        expect( ball1.contains() ).toBe('charchar');
-    });
+    expect(ball1.contains()).toBe("charchar");
+  });
 
-    test("throw()", () => {
-        const logSpy = jest.spyOn(global.console, "log");
-        const ball1 = new Pokeball();
-        const charchar = new Charmander("charchar", 1, 2);
-        ball1.throw(charchar);
-    
-        // Throw called with an argument, ball currently empty.
-        expect( ball1.contains() ).toBe('charchar');
-        expect(logSpy).toHaveBeenCalledWith(
-            "you caught charchar"
-        );
-        
-        const turtle = new Squirtle('turtle', 1, 2);
-        ball1.throw(turtle);
+  test("throw()", () => {
+    const logSpy = jest.spyOn(global.console, "log");
+    const ball1 = new Pokeball();
+    const charchar = new Charmander("charchar", 1, 2);
+    ball1.throw(charchar);
 
-        // Throw called with an argument, ball currently occupied.
-        expect( ball1.contains() ).toBe('charchar');
-        expect(logSpy).toHaveBeenCalledWith(
-            "there is a pokemon in this ball"
-        );
+    // Throw called with an argument, ball currently empty.
+    expect(ball1.contains()).toBe("charchar");
+    expect(logSpy).toHaveBeenCalledWith("you caught charchar");
 
-        const releasedPokemon = ball1.throw();
-        
-        // Throw called without argument, ball currently occupied.
-        expect(releasedPokemon.name).toBe('charchar');
-        expect(logSpy).toHaveBeenCalledWith('GO charchar !!!');
+    const turtle = new Squirtle("turtle", 1, 2);
+    ball1.throw(turtle);
 
-        ball1.storage = '';
-        const noPokemon = ball1.throw();
+    // Throw called with an argument, ball currently occupied.
+    expect(ball1.contains()).toBe("charchar");
+    expect(logSpy).toHaveBeenCalledWith("there is a pokemon in this ball");
 
-        // Throw called without argument, ball currently empty.
-        expect(logSpy).toHaveBeenCalledWith('there is no pokemon to release');
-    });
+    const releasedPokemon = ball1.throw();
+
+    // Throw called without argument, ball currently occupied.
+    expect(releasedPokemon.name).toBe("charchar");
+    expect(logSpy).toHaveBeenCalledWith("GO charchar !!!");
+
+    ball1.storage = "";
+    const noPokemon = ball1.throw();
+
+    // Throw called without argument, ball currently empty.
+    expect(logSpy).toHaveBeenCalledWith("there is no pokemon to release");
+  });
+});
+
+describe.only("Ptrainer section", () => {
+  test("constructor has an array of 6 elements", () => {
+    const new1 = new Trainer();
+    expect(new1.belt.length).toBe(6);
+  });
+  test("constructor has an array of 6 elements", () => {
+    const new1 = new Trainer();
+    expect(new1.belt[0].isEmpty()).toBe(true);
+  });
+  test("constructor has an array of 6 elements", () => {
+    const new1 = new Trainer();
+    const new2 = new Charmander("test2", 1, 2);
+    const new3 = new Rattata("test3", 1, 2);
+    const new4 = new Squirtle("test4", 1, 2);
+    const new5 = new Bulbasaur("test5", 1, 2);
+    const new6 = new GrassPokemon("test6", 1, 2, "tackle");
+    const new7 = new Charmander("test7", 1, 2);
+    new1.catch(new2);
+    new1.catch(new3);
+    new1.catch(new4);
+    new1.catch(new5);
+    new1.catch(new6);
+    new1.catch(new7);
+
+    expect(new1.belt[0].contains()).toBe("test2");
+    expect(new1.belt[5].contains()).toBe("test7");
+    expect(new1.belt[4].contains()).toBe("test6");
+  });
 });
