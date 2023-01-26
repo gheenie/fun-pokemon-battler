@@ -262,16 +262,16 @@ describe("Pokeball instantiation and methods", () => {
   });
 });
 
-describe.only("Ptrainer section", () => {
-  test("constructor has an array of 6 elements", () => {
+describe.only("Trainer class", () => {
+  test("constructor works correctly", () => {
     const new1 = new Trainer();
+
     expect(new1.belt.length).toBe(6);
+    expect(new1.belt[5].isEmpty()).toBe(true);
+    expect(new1.belt[0]).not.toBe(new1.belt[1]);
   });
-  test("constructor has an array of 6 elements", () => {
-    const new1 = new Trainer();
-    expect(new1.belt[0].isEmpty()).toBe(true);
-  });
-  test("constructor has an array of 6 elements", () => {
+
+  test("catch() correctly fills belt", () => {
     const new1 = new Trainer();
     const new2 = new Charmander("test2", 1, 2);
     const new3 = new Rattata("test3", 1, 2);
