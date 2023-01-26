@@ -41,56 +41,89 @@ class Pokemon {
 }
 
 class FirePokemon extends Pokemon {
-    isEffectiveAgainst(pokemon) {
-        if (pokemon.type === "grass") {
-            return true;
-        }
-        return false;
+  constructor(name, hitPoints, attackDamage, move = "tackle") {
+    super(name, hitPoints, attackDamage, "fire", move);
+  }
+  isEffectiveAgainst(pokemon) {
+    if (pokemon.type === "grass") {
+      return true;
     }
-    
-    isWeakto(pokemon) {
-        if (pokemon.type === "water") {
-            return true;
-        }
-        return false;
+    return false;
+  }
+
+  isWeakto(pokemon) {
+    if (pokemon.type === "water") {
+      return true;
     }
+    return false;
+  }
 }
 
 class WaterPokemon extends Pokemon {
-    isEffectiveAgainst(pokemon) {
-        if (pokemon.type === "fire") {
-            return true;
-        }
-        return false;
+  constructor(name, hitPoints, attackDamage, move = "tackle") {
+    super(name, hitPoints, attackDamage, "water", move);
+  }
+  isEffectiveAgainst(pokemon) {
+    if (pokemon.type === "fire") {
+      return true;
     }
-    
-    isWeakto(pokemon) {
-        if (pokemon.type === "grass") {
-            return true;
-        }
-        return false;
+    return false;
+  }
+
+  isWeakto(pokemon) {
+    if (pokemon.type === "grass") {
+      return true;
     }
+    return false;
+  }
 }
 
 class GrassPokemon extends Pokemon {
-    isEffectiveAgainst(pokemon) {
-        if (pokemon.type === "water") {
-            return true;
-        }
-        return false;
+  constructor(name, hitPoints, attackDamage, move = "tackle") {
+    super(name, hitPoints, attackDamage, "grass", move);
+  }
+  isEffectiveAgainst(pokemon) {
+    if (pokemon.type === "water") {
+      return true;
     }
-    
-    isWeakto(pokemon) {
-        if (pokemon.type === "fire") {
-            return true;
-        }
-        return false;
+    return false;
+  }
+
+  isWeakto(pokemon) {
+    if (pokemon.type === "fire") {
+      return true;
     }
+    return false;
+  }
 }
 
+class Charmander extends FirePokemon {
+  constructor(name, hitPoints, attackDamage) {
+    super(name, hitPoints, attackDamage, "ember");
+  }
+}
+
+class Squirtle extends WaterPokemon {
+  constructor(name, hitPoints, attackDamage) {
+    super(name, hitPoints, attackDamage, "water gun");
+  }
+}
+
+class Bulbasaur extends GrassPokemon {
+  constructor(name, hitPoints, attackDamage) {
+    super(name, hitPoints, attackDamage, "vine whip");
+  }
+}
+
+class Rattata extends Pokemon {}
+
 module.exports = [
-    Pokemon,
-    FirePokemon,
-    WaterPokemon,
-    GrassPokemon
+  Pokemon,
+  FirePokemon,
+  WaterPokemon,
+  GrassPokemon,
+  Charmander,
+  Squirtle,
+  Bulbasaur,
+  Rattata,
 ];

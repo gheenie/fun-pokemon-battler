@@ -1,8 +1,12 @@
 const [
-    Pokemon, 
-    FirePokemon, 
-    WaterPokemon, 
-    GrassPokemon
+  Pokemon,
+  FirePokemon,
+  WaterPokemon,
+  GrassPokemon,
+  Charmander,
+  Squirtle,
+  Bulbasaur,
+  Rattata,
 ] = require("./index");
 
 describe("instantiating Pokemon", () => {
@@ -72,79 +76,134 @@ describe("testing Pokemon methods", () => {
 });
 
 describe("instantiating Pokemon subclasses", () => {
-    test("all properties are specified", () => {
-        const firePokemon = new FirePokemon("fifire", 50, 33, "fire", "headbutt");
-        const waterPokemon = new WaterPokemon("wawater", 50, 33, "water", "headbutt");
-        const grassPokemon = new GrassPokemon("grgrass", 50, 33, "grass", "headbutt");
-        
-        expect(firePokemon.name).toBe("fifire");
-        expect(firePokemon.type).toBe("fire");
-        expect(firePokemon.hitPoints).toBe(50);
-        expect(firePokemon.attackDamage).toBe(33);
-        expect(firePokemon.move).toBe("headbutt");
+  test("all properties are specified", () => {
+    const firePokemon = new FirePokemon("fifire", 50, 33, "headbutt");
+    const waterPokemon = new WaterPokemon("wawater", 50, 33, "headbutt");
+    const grassPokemon = new GrassPokemon(
+      "grgrass",
+      50,
+      33,
 
-        expect(waterPokemon.name).toBe('wawater');
-        expect(grassPokemon.name).toBe('grgrass');
-    });
+      "headbutt"
+    );
+
+    expect(firePokemon.name).toBe("fifire");
+    expect(firePokemon.type).toBe("fire");
+    expect(firePokemon.hitPoints).toBe(50);
+    expect(firePokemon.attackDamage).toBe(33);
+    expect(firePokemon.move).toBe("headbutt");
+
+    expect(waterPokemon.name).toBe("wawater");
+    expect(grassPokemon.name).toBe("grgrass");
+  });
 });
 
-describe.only("testing overriding methods of Pokemon subclasses", () => {
-    const firePokemon = new FirePokemon("fifire", 50, 33, "fire", "headbutt");
-    const waterPokemon = new WaterPokemon("wawater", 50, 33, "water", "headbutt");
-    const grassPokemon = new GrassPokemon("grgrass", 50, 33, "grass", "headbutt");
-    
-    test("fire pokemon effective against grass", () => {
-        expect( firePokemon.isEffectiveAgainst(grassPokemon) ).toBe(true);
-    });
+describe("testing overriding methods of Pokemon subclasses", () => {
+  const firePokemon = new FirePokemon("fifire", 50, 33, "headbutt");
+  const waterPokemon = new WaterPokemon("wawater", 50, 33, "headbutt");
+  const grassPokemon = new GrassPokemon("grgrass", 50, 33, "headbutt");
 
-    test("fire pokemon effective against others", () => {
-        expect( firePokemon.isEffectiveAgainst(waterPokemon) ).toBe(false);
-    });
-    
-    test("water pokemon effective against fire", () => {
-        expect( waterPokemon.isEffectiveAgainst(firePokemon) ).toBe(true);
-    });
+  test("fire pokemon effective against grass", () => {
+    expect(firePokemon.isEffectiveAgainst(grassPokemon)).toBe(true);
+  });
 
-    test("water pokemon effective against others", () => {
-        expect( waterPokemon.isEffectiveAgainst(grassPokemon) ).toBe(false);
-    });
+  test("fire pokemon effective against others", () => {
+    expect(firePokemon.isEffectiveAgainst(waterPokemon)).toBe(false);
+  });
 
-    test("grass pokemon effective against water", () => {
-        expect( grassPokemon.isEffectiveAgainst(waterPokemon) ).toBe(true);
-    });
+  test("water pokemon effective against fire", () => {
+    expect(waterPokemon.isEffectiveAgainst(firePokemon)).toBe(true);
+  });
 
-    test("grass pokemon effective against others", () => {
-        expect( grassPokemon.isEffectiveAgainst(firePokemon) ).toBe(false);
-    });
-    
-    test("fire pokemon weak against grass", () => {
-        expect( firePokemon.isWeakto(waterPokemon) ).toBe(true);
-    });
+  test("water pokemon effective against others", () => {
+    expect(waterPokemon.isEffectiveAgainst(grassPokemon)).toBe(false);
+  });
 
-    test("fire pokemon weak against others", () => {
-        expect( firePokemon.isWeakto(grassPokemon) ).toBe(false);
-    });
-    
-    test("water pokemon weak against fire", () => {
-        expect( waterPokemon.isWeakto(grassPokemon) ).toBe(true);
-    });
+  test("grass pokemon effective against water", () => {
+    expect(grassPokemon.isEffectiveAgainst(waterPokemon)).toBe(true);
+  });
 
-    test("water pokemon weak against others", () => {
-        expect( waterPokemon.isWeakto(firePokemon) ).toBe(false);
-    });
+  test("grass pokemon effective against others", () => {
+    expect(grassPokemon.isEffectiveAgainst(firePokemon)).toBe(false);
+  });
 
-    test("grass pokemon weak against water", () => {
-        expect( grassPokemon.isWeakto(firePokemon) ).toBe(true);
-    });
+  test("fire pokemon weak against grass", () => {
+    expect(firePokemon.isWeakto(waterPokemon)).toBe(true);
+  });
 
-    test("grass pokemon weak against others", () => {
-        expect( grassPokemon.isWeakto(waterPokemon) ).toBe(false);
-    });
+  test("fire pokemon weak against others", () => {
+    expect(firePokemon.isWeakto(grassPokemon)).toBe(false);
+  });
+
+  test("water pokemon weak against fire", () => {
+    expect(waterPokemon.isWeakto(grassPokemon)).toBe(true);
+  });
+
+  test("water pokemon weak against others", () => {
+    expect(waterPokemon.isWeakto(firePokemon)).toBe(false);
+  });
+
+  test("grass pokemon weak against water", () => {
+    expect(grassPokemon.isWeakto(firePokemon)).toBe(true);
+  });
+
+  test("grass pokemon weak against others", () => {
+    expect(grassPokemon.isWeakto(waterPokemon)).toBe(false);
+  });
 });
 
-//fire>grass
-//fire<water
-//grass>water
-//grass<fire
-//water>fire
-//water<grass
+describe("extending classes from sub classes", () => {
+  test("Charmander should contain 5 properties", () => {
+    const charmander = new Charmander("Charmander", 1, 2);
+
+    expect(charmander.hasOwnProperty("name")).toBe(true);
+    expect(charmander.name).toBe("Charmander");
+    expect(charmander.hasOwnProperty("type")).toBe(true);
+    expect(charmander.type).toBe("fire");
+    expect(charmander.hasOwnProperty("hitPoints")).toBe(true);
+    expect(charmander.hitPoints).toBe(1);
+    expect(charmander.hasOwnProperty("attackDamage")).toBe(true);
+    expect(charmander.attackDamage).toBe(2);
+    expect(charmander.hasOwnProperty("move")).toBe(true);
+    expect(charmander.move).toBe("ember");
+  });
+  test("Squirtle should contain 5 properties", () => {
+    const squirtle = new Squirtle("Squirtle", 1, 2);
+    expect(squirtle.hasOwnProperty("name")).toBe(true);
+    expect(squirtle.name).toBe("Squirtle");
+    expect(squirtle.hasOwnProperty("type")).toBe(true);
+    expect(squirtle.type).toBe("water");
+    expect(squirtle.hasOwnProperty("hitPoints")).toBe(true);
+    expect(squirtle.hitPoints).toBe(1);
+    expect(squirtle.hasOwnProperty("attackDamage")).toBe(true);
+    expect(squirtle.attackDamage).toBe(2);
+    expect(squirtle.hasOwnProperty("move")).toBe(true);
+    expect(squirtle.move).toBe("water gun");
+  });
+  test("Bulbasaur should contain 5 properties", () => {
+    const bulbasaur = new Bulbasaur("Bulbasaur", 1, 2);
+    expect(bulbasaur.hasOwnProperty("name")).toBe(true);
+    expect(bulbasaur.name).toBe("Bulbasaur");
+    expect(bulbasaur.hasOwnProperty("type")).toBe(true);
+    expect(bulbasaur.type).toBe("grass");
+    expect(bulbasaur.hasOwnProperty("hitPoints")).toBe(true);
+    expect(bulbasaur.hitPoints).toBe(1);
+    expect(bulbasaur.hasOwnProperty("attackDamage")).toBe(true);
+    expect(bulbasaur.attackDamage).toBe(2);
+    expect(bulbasaur.hasOwnProperty("move")).toBe(true);
+    expect(bulbasaur.move).toBe("vine whip");
+  });
+  test("Rattata should contain 5 properties", () => {
+    const rattata = new Rattata("Rattata", 1, 2);
+    expect(rattata.hasOwnProperty("name")).toBe(true);
+    expect(rattata.name).toBe("Rattata");
+    expect(rattata.hasOwnProperty("type")).toBe(true);
+    expect(rattata.type).toBe("normal");
+    expect(rattata.hasOwnProperty("hitPoints")).toBe(true);
+    expect(rattata.hitPoints).toBe(1);
+    expect(rattata.hasOwnProperty("attackDamage")).toBe(true);
+    expect(rattata.attackDamage).toBe(2);
+    expect(rattata.hasOwnProperty("move")).toBe(true);
+    expect(rattata.move).toBe("tackle");
+  });
+});
