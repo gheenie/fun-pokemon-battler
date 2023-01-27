@@ -320,10 +320,23 @@ describe.only("Battle class/method", () => {
     const pokemon2 = new Pokemon("pokemon2", 10, 2);
     trainer1.catch(pokemon1);
     trainer2.catch(pokemon2);
+
+    // Check that pokemon is stored in correct ball, ball is stored in correct position of belt,
+    // trainer is correctly initialised and catch() is working correctly.
+    expect(trainer1.belt[0].storage).toEqual(pokemon1);
+    expect(trainer1.belt[1].storage).toEqual('');
+    expect(trainer2.belt[0].storage).toEqual(pokemon2);
+    expect(trainer2.belt[1].storage).toEqual('');
+
     const battle = new Battle(trainer1, [pokemon1.name], trainer2, [
       pokemon2.name,
     ]);
+    expect(battle.turn).toEqual(trainer1);
+    expect(battle.attackingPokemon).toEqual(pokemon1);
     battle.fight();
+    expect(battle.turn).toEqual(trainer2);
+    expect(battle.attackingPokemon).toEqual(pokemon2);
+    expect(pokemon2.hitPoints).toBe(8.5);
     battle.fight();
     battle.fight();
     battle.fight();
