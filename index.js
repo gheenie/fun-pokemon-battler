@@ -27,7 +27,7 @@ class Pokemon {
 
   useMove() {
     console.log(
-      `Pokemon${this.name} used ${this.attackDamage} Pokemon${this.name}'s moves`
+      `${this.name} used ${this.move}. Attack Damage is ${this.attackDamage}`
     );
     return this.attackDamage;
   }
@@ -154,38 +154,96 @@ class Pokeball {
 }
 
 class Trainer {
-    constructor() {
-        const ball1 = new Pokeball();
-        const ball2 = new Pokeball();
-        const ball3 = new Pokeball();
-        const ball4 = new Pokeball();
-        const ball5 = new Pokeball();
-        const ball6 = new Pokeball();
+  constructor() {
+    const ball1 = new Pokeball();
+    const ball2 = new Pokeball();
+    const ball3 = new Pokeball();
+    const ball4 = new Pokeball();
+    const ball5 = new Pokeball();
+    const ball6 = new Pokeball();
 
-        this.belt = [ball1, ball2, ball3, ball4, ball5, ball6];
+    this.belt = [ball1, ball2, ball3, ball4, ball5, ball6];
+  }
+
+  catch(pokemon) {
+    for (let i = 0; i < this.belt.length; i++) {
+      const ball = this.belt[i];
+
+      if (ball.isEmpty()) {
+        ball.throw(pokemon);
+        break;
+      }
     }
+  }
 
-    catch(pokemon) {
-        for (let i = 0; i < this.belt.length; i++) {
-            const ball = this.belt[i];
+  getPokemon(name) {
+    for (let i = 0; i < this.belt.length; i++) {
+      const ball = this.belt[i];
 
-            if ( ball.isEmpty() ) {
-                ball.throw(pokemon);
-                break;
-            }
-        }
+      if (ball.contains() === name) {
+        return ball.throw();
+      }
     }
+  }
+}
 
-    getPokemon(name) {
-        for (let i = 0; i < this.belt.length; i++) {
-            const ball = this.belt[i];
+class Battle {
+  constructor(
+    trainer1,
+    pokemon1,
+    trainer2,
+    pokemon2,
+    attackingPokemon,
+    defendingPokemon
+  ) {
+    this.trainer1 = trainer1;
+    this.pokemon1 = pokemon1;
+    this.trainer2 = trainer2;
+    this.pokemon2 = pokemon2;
+    this.pokemon1Current = 0;
+    this.pokemon2Current = 0;
+    this.turn = this.trainer1;
+    this.attackingPokemon =
+      attackingPokemon || this.trainer1.getPokemon(pokemon1[0]);
+    this.defendingPokemon =
+      defendingPokemon || this.trainer2.getPokemon(pokemon2[0]);
+  }
+  fight() {
+    let attack = this.attackingPokemon.useMove();
+    if (this.defendingPokemon.isEffectiveAgainst(this.attackingPokemon)) {
+      attack *= 0.75;
+      console.log(
+        `defending pokemon is stronger. Attack score is now ${attack}`
+      );
+    } else if (this.defendingPokemon.isWeakto(this.attackingPokemon)) {
+      attack *= 1.25;
+      console.log(`defending pokemon is weaker. Attack score is now ${attack}`);
+    } else console.log(`Good try!`);
 
-            if ( ball.contains() === "name" ) {
-                ball.throw();
-                break;
-            }
-        }
+    this.defendingPokemon.takeDamage(this.attackingPokemon);
+    if (this.defendingPokemon.hasFainted()) {
+      console.log(`${this.defendingPokemon} has died`);
+      if (
+        this.turn === this.trainer1 &&
+        this.pokemon1Current === this.pokemon1.length - 1
+      ) {
+        console.log(`Trainer 2 has won!`);
+      } else if (
+        this.turn === this.trainer2 &&
+        this.pokemon2Current === this.pokemon2.length - 1
+      ) {
+        console.log(`Trainer 1 has won!`);
+      }
     }
+    if (this.turn === this.trainer1) {
+      this.turn = this.trainer2;
+    } else {
+      this.turn = this.trainer1;
+    }
+    const tempPokemon = this.attackingPokemon;
+    this.attackingPokemon = this.defendingPokemon;
+    this.defendingPokemon = tempPokemon;
+  }
 }
 
 module.exports = [
@@ -199,4 +257,5 @@ module.exports = [
   Rattata,
   Pokeball,
   Trainer,
+  Battle,
 ];

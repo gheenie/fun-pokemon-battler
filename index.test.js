@@ -9,6 +9,7 @@ const [
   Rattata,
   Pokeball,
   Trainer,
+  Battle,
 ] = require("./index");
 
 describe("instantiating Pokemon", () => {
@@ -262,7 +263,7 @@ describe("Pokeball instantiation and methods", () => {
   });
 });
 
-describe.only("Trainer class", () => {
+describe("Trainer class", () => {
   test("constructor works correctly", () => {
     const new1 = new Trainer();
 
@@ -289,5 +290,42 @@ describe.only("Trainer class", () => {
     expect(new1.belt[0].contains()).toBe("test2");
     expect(new1.belt[5].contains()).toBe("test7");
     expect(new1.belt[4].contains()).toBe("test6");
+  });
+  describe("Trainer - getPokemon method", () => {
+    test("check for the the Pokemon with that name in the belt + return specific pokemon ", () => {
+      const new1 = new Trainer();
+      const new2 = new Charmander("test2", 1, 2);
+      const new3 = new Rattata("test3", 1, 2);
+      const new4 = new Squirtle("test4", 1, 2);
+      const new5 = new Bulbasaur("test5", 1, 2);
+      const new6 = new GrassPokemon("test6", 1, 2, "tackle");
+      const new7 = new Charmander("test7", 1, 2);
+      new1.catch(new2);
+      new1.catch(new3);
+      new1.catch(new4);
+      new1.catch(new5);
+      new1.catch(new6);
+      new1.catch(new7);
+      expect(new1.getPokemon("test2").name).toBe("test2");
+      expect(new1.getPokemon("test5")).toEqual(new5);
+    });
+  });
+});
+
+describe.only("Battle class/method", () => {
+  test("should ", () => {
+    const trainer1 = new Trainer();
+    const pokemon1 = new Pokemon("pokemon1", 10, 2);
+    const trainer2 = new Trainer();
+    const pokemon2 = new Pokemon("pokemon2", 10, 2);
+    trainer1.catch(pokemon1);
+    trainer2.catch(pokemon2);
+    const battle = new Battle(trainer1, [pokemon1.name], trainer2, [
+      pokemon2.name,
+    ]);
+    battle.fight();
+    battle.fight();
+    battle.fight();
+    battle.fight();
   });
 });
