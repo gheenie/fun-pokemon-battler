@@ -220,21 +220,24 @@ class Battle {
       console.log(`defending pokemon is weaker. Attack score is now ${attack}`);
     } else console.log(`Good try!`);
 
-    this.defendingPokemon.takeDamage(this.attackingPokemon);
+    this.defendingPokemon.takeDamage(attack);
+    console.log(`${this.defendingPokemon.name}'s remaining HP is ${this.defendingPokemon.hitPoints}`);
+
     if (this.defendingPokemon.hasFainted()) {
-      console.log(`${this.defendingPokemon} has died`);
+      console.log(`${this.defendingPokemon.name} has died`);
       if (
         this.turn === this.trainer1 &&
-        this.pokemon1Current === this.pokemon1.length - 1
-      ) {
-        console.log(`Trainer 2 has won!`);
-      } else if (
-        this.turn === this.trainer2 &&
         this.pokemon2Current === this.pokemon2.length - 1
       ) {
         console.log(`Trainer 1 has won!`);
+      } else if (
+        this.turn === this.trainer2 &&
+        this.pokemon1Current === this.pokemon1.length - 1
+      ) {
+        console.log(`Trainer 2 has won!`);
       }
     }
+
     if (this.turn === this.trainer1) {
       this.turn = this.trainer2;
     } else {
