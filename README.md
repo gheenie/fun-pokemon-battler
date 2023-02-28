@@ -25,9 +25,9 @@ Below you will find a plan of what structures we think will be useful for the ga
   - `move`: This is the move the Pokemon does when battling, this should default to "tackle"
 
  ### Methods
-
+_(all of these methods should be for the parent Pokemon class that you have already built with the type "normal", other types are explored further on)_
 - `isEffectiveAgainst`
-  - this will take as an argument a Pokemon and return a Boolean if the Pokemon is effective against the given Pokemon, "normal" Pokemon are not effective against anything
+  - this will take a Pokemon as an argument and return a Boolean if the Pokemon is effective against the given Pokemon, "normal" Pokemon are not effective against anything
 - `isWeakTo`
   - this will take as an argument a Pokemon and return a Boolean if this pokemon is weak to the given Pokemon
   - "normal" Pokemon are not weak to anything
